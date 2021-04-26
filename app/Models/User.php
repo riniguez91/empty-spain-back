@@ -14,12 +14,33 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable, HasFactory;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'usuario';
+
+    /**
+     * @return Relations\HasMany 1-user => N-Busquedas
+     */
+    public function busqueda() { 
+        return $this->hasMany(Busqueda::class);
+    }
+
+    /**
+     * @return 
+     */
+    public function addUser() {
+        return True;
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'name', 'surnames', 'email', 'password', 'role', 
     ];
 
     /**
@@ -29,5 +50,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
-    ];
+    ]; 
 }

@@ -13,6 +13,17 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function() {
+    return 'Hello world';
 });
+
+$router->post("/login", ["uses" => "UserController@authenticate"]);
+$router->post("/register", "UserController@register"); 
+
+/* Route::prefix('auth')->group(function() {
+    Route::post('/login', [UserController::class, 'authenticate']);
+    Route::post('/register', [UserController::class, 'register']);
+}); */
+
