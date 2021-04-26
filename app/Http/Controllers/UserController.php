@@ -113,7 +113,7 @@ class UserController extends Controller
         $user->save();
 
         // We remove the password since we are returning the object back to the user
-        unset($user->password);
+        // unset($user->password);
 
         return response()->json([
             'success' => true
