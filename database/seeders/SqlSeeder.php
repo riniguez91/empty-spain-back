@@ -16,7 +16,7 @@ class SqlSeeder extends Seeder
     public function run()
     {
         //Carga los datos del SQL
-        $path = base_path() . '/prueba.sql';
+        $path = base_path() . '/empty_spain.sql';
         $sql = file_get_contents($path);
         DB::unprepared($sql);
     }
