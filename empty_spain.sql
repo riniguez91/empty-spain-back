@@ -1,57 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 5.0.3
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2021 a las 14:10:08
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.34
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `empty_spain`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `busqueda`
---
-
-CREATE TABLE `busqueda` (
-  `ID_busqueda` int(11) NOT NULL,
-  `Scrapper_TridAdvisor` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`Scrapper_TridAdvisor`)),
-  `Fecha_busqueda` datetime NOT NULL,
-  `FK_usuario` int(11) NOT NULL,
-  `FK_municipio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ccaa`
---
-
-CREATE TABLE `ccaa` (
-  `Codigo_Autonomia` int(2) NOT NULL,
-  `Autonomia` varchar(28) DEFAULT NULL,
-  `Img_ccaa` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `ccaa`
---
-
-INSERT INTO `ccaa` (`Codigo_Autonomia`, `Autonomia`, `Img_ccaa`) VALUES
+INSERT INTO `ccaa` (`id`, `autonomia`, `image`) VALUES
 (1, 'Andalucía', ''),
 (2, 'Aragón', ''),
 (3, 'Asturias (Principado de)', ''),
@@ -72,24 +19,61 @@ INSERT INTO `ccaa` (`Codigo_Autonomia`, `Autonomia`, `Img_ccaa`) VALUES
 (18, 'Ceuta (Ciudad de)', ''),
 (19, 'Melilla (Ciudad de)', '');
 
--- --------------------------------------------------------
+INSERT INTO `provincias` (`id`, `provincia`, `ccaa_id`) VALUES
+(1, 'Araba/Álava', 16),
+(2, 'Albacete', 8),
+(3, 'Alicante/Alacant', 10),
+(4, 'Almería', 1),
+(5, 'Ávila', 7),
+(6, 'Badajoz', 11),
+(7, 'Balears (Illes)', 4),
+(8, 'Barcelona', 9),
+(9, 'Burgos', 7),
+(10, 'Cáceres', 11),
+(11, 'Cádiz', 1),
+(12, 'Castellón/Castelló', 10),
+(13, 'Ciudad Real', 8),
+(14, 'Córdoba', 1),
+(15, 'Coruña (A)', 12),
+(16, 'Cuenca', 8),
+(17, 'Girona', 9),
+(18, 'Granada', 1),
+(19, 'Guadalajara', 8),
+(20, 'Gipuzkoa', 16),
+(21, 'Huelva', 1),
+(22, 'Huesca', 2),
+(23, 'Jaén', 1),
+(24, 'León', 7),
+(25, 'Lleida', 9),
+(26, 'Rioja (La)', 17),
+(27, 'Lugo', 12),
+(28, 'Madrid', 13),
+(29, 'Málaga', 1),
+(30, 'Murcia', 14),
+(31, 'Navarra', 15),
+(32, 'Ourense', 12),
+(33, 'Asturias', 3),
+(34, 'Palencia', 7),
+(35, 'Palmas (Las)', 5),
+(36, 'Pontevedra', 12),
+(37, 'Salamanca', 7),
+(38, 'Santa Cruz de Tenerife', 5),
+(39, 'Cantabria', 6),
+(40, 'Segovia', 7),
+(41, 'Sevilla', 1),
+(42, 'Soria', 7),
+(43, 'Tarragona', 9),
+(44, 'Teruel', 2),
+(45, 'Toledo', 8),
+(46, 'Valencia/València', 10),
+(47, 'Valladolid', 7),
+(48, 'Bizkaia', 16),
+(49, 'Zamora', 7),
+(50, 'Zaragoza', 2),
+(51, 'Ceuta', 18),
+(52, 'Melilla', 19);
 
---
--- Estructura de tabla para la tabla `municipios`
---
-
-CREATE TABLE `municipios` (
-  `Codigo_Municipio` int(5) NOT NULL,
-  `Municipio` varchar(47) DEFAULT NULL,
-  `Superficie` varchar(7) DEFAULT NULL,
-  `FK_Provincia` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `municipios`
---
-
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (1001, 'Alegría-Dulantzi', '19,95', 1),
 (1002, 'Amurrio', '96,36', 1),
 (1003, 'Aramaio', '73,27', 1),
@@ -1520,9 +1504,9 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (9339, 'San Martín de Rubiales', '19,4', 9),
 (9340, 'San Millán de Lara', '33,62', 9),
 (9343, 'Santa Cecilia', '12,46', 9),
-(9345, 'Santa Cruz de la Salceda', '25,86', 9);
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
-(9346, 'Santa Cruz del Valle Urbión', '33,92', 9),
+(9345, 'Santa Cruz de la Salceda', '25,86', 9),
+(9346, 'Santa Cruz del Valle Urbión', '33,92', 9);
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (9347, 'Santa Gadea del Cid', '28,98', 9),
 (9348, 'Santa Inés', '14,87', 9),
 (9350, 'Santa María del Campo', '60,32', 9),
@@ -2901,10 +2885,10 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (18171, 'Salar', '84,35', 18),
 (18173, 'Salobreña', '34,91', 18),
 (18174, 'Santa Cruz del Comercio', '16,89', 18),
-(18175, 'Santa Fe', '38,2', 18);
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
+(18175, 'Santa Fe', '38,2', 18),
 (18176, 'Soportújar', '14,16', 18),
-(18177, 'Sorvilán', '34,33', 18),
+(18177, 'Sorvilán', '34,33', 18);
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (18178, 'Torre-Cardela', '15,19', 18),
 (18179, 'Torvizcón', '51,4', 18),
 (18180, 'Trevélez', '90,96', 18),
@@ -4302,11 +4286,11 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (26180, 'Zarratón', '18,69', 26),
 (26181, 'Zarzosa', '18,29', 26),
 (26183, 'Zorraquín', '6,44', 26),
-(27001, 'Abadín', '196,02', 27);
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
+(27001, 'Abadín', '196,02', 27),
 (27002, 'Alfoz', '77,5', 27),
 (27003, 'Antas de Ulla', '103,6', 27),
-(27004, 'Baleira', '168,82', 27),
+(27004, 'Baleira', '168,82', 27);
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (27005, 'Barreiros', '72,42', 27),
 (27006, 'Becerreá', '172,05', 27),
 (27007, 'Begonte', '126,8', 27),
@@ -5690,10 +5674,10 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (37281, 'Sanchón de la Sagrada', '15,08', 37),
 (37282, 'Sanchotello', '14,03', 37),
 (37283, 'Sando', '60,58', 37),
-(37284, 'San Esteban de la Sierra', '20,83', 37);
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
+(37284, 'San Esteban de la Sierra', '20,83', 37),
 (37285, 'San Felices de los Gallegos', '81,43', 37),
-(37286, 'San Martín del Castañar', '15,5', 37),
+(37286, 'San Martín del Castañar', '15,5', 37);
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (37287, 'San Miguel de Valero', '28,55', 37),
 (37288, 'San Morales', '4,92', 37),
 (37289, 'San Muñoz', '53,9', 37),
@@ -7053,11 +7037,11 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (45193, 'Villanueva de Bogas', '57,44', 45),
 (45194, 'Villarejo de Montalbán', '65,37', 45),
 (45195, 'Villarrubia de Santiago', '155,29', 45),
-(45196, 'Villaseca de la Sagra', '31,76', 45);
-INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Provincia`) VALUES
+(45196, 'Villaseca de la Sagra', '31,76', 45),
 (45197, 'Villasequilla', '76,95', 45),
 (45198, 'Villatobas', '181,58', 45),
-(45199, 'Viso de San Juan, El', '53,02', 45),
+(45199, 'Viso de San Juan, El', '53,02', 45);
+INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUES
 (45200, 'Yébenes, Los', '677,46', 45),
 (45201, 'Yeles', '20,33', 45),
 (45202, 'Yepes', '85,54', 45),
@@ -8212,153 +8196,8 @@ INSERT INTO `municipios` (`Codigo_Municipio`, `Municipio`, `Superficie`, `FK_Pro
 (51001, 'Ceuta', '19,48', 51),
 (52001, 'Melilla', '13,41', 52);
 
--- --------------------------------------------------------
+INSERT INTO `usuario` (`id`, `email`, `name`, `surnames`, `password`, `role`, `updated_at`, `created_at`) VALUES
+(1, 'test7@test.com', 'TestRegister', 'test', '$2y$10$KpuvKZB5knABzdYjlWSNxOGjhhcot.4xfX40ZIySznHkgRi88qjKm', 1, '2021-04-26 20:20:31', '2021-04-26 20:20:31');
 
---
--- Estructura de tabla para la tabla `provincias`
---
-
-CREATE TABLE `provincias` (
-  `Codigo_Provincia` int(2) NOT NULL,
-  `Provincia` varchar(22) DEFAULT NULL,
-  `FK_CCAA` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `provincias`
---
-
-INSERT INTO `provincias` (`Codigo_Provincia`, `Provincia`, `FK_CCAA`) VALUES
-(1, 'Araba/Álava', 16),
-(2, 'Albacete', 8),
-(3, 'Alicante/Alacant', 10),
-(4, 'Almería', 1),
-(5, 'Ávila', 7),
-(6, 'Badajoz', 11),
-(7, 'Balears (Illes)', 4),
-(8, 'Barcelona', 9),
-(9, 'Burgos', 7),
-(10, 'Cáceres', 11),
-(11, 'Cádiz', 1),
-(12, 'Castellón/Castelló', 10),
-(13, 'Ciudad Real', 8),
-(14, 'Córdoba', 1),
-(15, 'Coruña (A)', 12),
-(16, 'Cuenca', 8),
-(17, 'Girona', 9),
-(18, 'Granada', 1),
-(19, 'Guadalajara', 8),
-(20, 'Gipuzkoa', 16),
-(21, 'Huelva', 1),
-(22, 'Huesca', 2),
-(23, 'Jaén', 1),
-(24, 'León', 7),
-(25, 'Lleida', 9),
-(26, 'Rioja (La)', 17),
-(27, 'Lugo', 12),
-(28, 'Madrid', 13),
-(29, 'Málaga', 1),
-(30, 'Murcia', 14),
-(31, 'Navarra', 15),
-(32, 'Ourense', 12),
-(33, 'Asturias', 3),
-(34, 'Palencia', 7),
-(35, 'Palmas (Las)', 5),
-(36, 'Pontevedra', 12),
-(37, 'Salamanca', 7),
-(38, 'Santa Cruz de Tenerife', 5),
-(39, 'Cantabria', 6),
-(40, 'Segovia', 7),
-(41, 'Sevilla', 1),
-(42, 'Soria', 7),
-(43, 'Tarragona', 9),
-(44, 'Teruel', 2),
-(45, 'Toledo', 8),
-(46, 'Valencia/València', 10),
-(47, 'Valladolid', 7),
-(48, 'Bizkaia', 16),
-(49, 'Zamora', 7),
-(50, 'Zaragoza', 2),
-(51, 'Ceuta', 18),
-(52, 'Melilla', 19);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `ID_usuario` int(11) NOT NULL,
-  `Nombre_usuario` text NOT NULL,
-  `Nombre` text NOT NULL,
-  `Apellidos` text NOT NULL,
-  `Contraseña` text NOT NULL,
-  `Rol` tinyint(1) NOT NULL COMMENT 'Rol:0 usuario no registrado | \r\nRol:1 Usuario registrado'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `busqueda`
---
-ALTER TABLE `busqueda`
-  ADD PRIMARY KEY (`ID_busqueda`),
-  ADD KEY `FK_usuario` (`FK_usuario`),
-  ADD KEY `FK_municipio` (`FK_municipio`);
-
---
--- Indices de la tabla `ccaa`
---
-ALTER TABLE `ccaa`
-  ADD PRIMARY KEY (`Codigo_Autonomia`);
-
---
--- Indices de la tabla `municipios`
---
-ALTER TABLE `municipios`
-  ADD PRIMARY KEY (`Codigo_Municipio`),
-  ADD KEY `FK_Provincia` (`FK_Provincia`);
-
---
--- Indices de la tabla `provincias`
---
-ALTER TABLE `provincias`
-  ADD PRIMARY KEY (`Codigo_Provincia`),
-  ADD KEY `FK_CCAA` (`FK_CCAA`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`ID_usuario`);
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `busqueda`
---
-ALTER TABLE `busqueda`
-  ADD CONSTRAINT `FK_municipio` FOREIGN KEY (`FK_municipio`) REFERENCES `municipios` (`Codigo_Municipio`),
-  ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`FK_usuario`) REFERENCES `usuario` (`ID_usuario`);
-
---
--- Filtros para la tabla `municipios`
---
-ALTER TABLE `municipios`
-  ADD CONSTRAINT `FK_Provincia` FOREIGN KEY (`FK_Provincia`) REFERENCES `provincias` (`Codigo_Provincia`);
-
---
--- Filtros para la tabla `provincias`
---
-ALTER TABLE `provincias`
-  ADD CONSTRAINT `FK_CCAA` FOREIGN KEY (`FK_CCAA`) REFERENCES `ccaa` (`Codigo_Autonomia`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `busqueda` (`id`, `tripadvisor_info`, `search_date`, `municipio_id`, `usuario_id`, `updated_at`, `created_at`) VALUES
+(1, '{\"test\": \"test\"}', '2021-04-26 13:23:12', 1001, 1, '2021-04-26 20:20:43', '2021-04-26 20:20:43');
