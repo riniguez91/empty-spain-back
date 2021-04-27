@@ -19,7 +19,8 @@ class CreateUsuarioTable extends Migration
             $table->string('name');
             $table->string('surnames');
             $table->string('password');
-            $table->tinyInteger('role');
+            $table->tinyInteger('role')->nullable();
+            $table->string('access_token')->nullable();
             $table->timestamps();
         });
     }

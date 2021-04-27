@@ -15,9 +15,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-$router->post("/login", ["uses" => "UserController@authenticate"]);
-$router->post("/register", "UserController@register"); 
-$router->post("/scrapers/tripadvisor", "BusquedaController@addSearch");
+$router->post('/login', [
+    /* 'middleware' => 'cors',  */
+    'uses' => 'UserController@authenticate'
+]); 
+
+$router->post('/register', 'UserController@register'); 
+$router->post('/scrapers/tripadvisor', 'BusquedaController@addSearch');
 
 /* Route::prefix('auth')->group(function() {
     Route::post('/login', [UserController::class, 'authenticate']);

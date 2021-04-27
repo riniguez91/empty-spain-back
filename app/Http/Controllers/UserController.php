@@ -65,13 +65,20 @@ class UserController extends Controller
                 'error' => 'Email does not exist'
             ], 400);
         }
-        
 
         // Checks the password and returns token if succesful
-        if (Hash::check($this->request->input('password'), $user->password)) {
+        if (Hash::check($this->request->password, $user->password)) {
+            // We set the jwt token on the db
+            $access_token = $this->generateJWT($user);
+            $user->access_token = $access_token;
+            $user->save();
+
             return response()->json([
                 'success' => true,
-                'access_token' => $this->generateJWT($user)
+                'name' => $user->name,
+                'surnames' => $user->surnames,
+                'role' => $user->role,
+                'access_token' => $access_token
             ], 200);
         }
 
@@ -92,8 +99,7 @@ class UserController extends Controller
             'name' => 'required',
             'surnames' => 'required',
             'password' => 'required',
-            'email' => 'required|email|unique:usuario',
-            'role' => 'required'
+            'email' => 'required|email|unique:usuario'
         ]);
 
         if ($validator->fails()) {
@@ -108,7 +114,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->surnames = $request->surnames;
         $user->email = $request->email;
-        $user->password = Hash::make('$request->password');
+        $user->password = Hash::make($request->password);
         $user->role = $request->role;
         $user->save();
 
