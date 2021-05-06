@@ -17,6 +17,7 @@ class CreateProvinciasTable extends Migration
             $table->increments('id');
             $table->integer('ccaa_id')->unsigned();
             $table->string('provincia');
+            $table->string('image');
             $table->foreign('ccaa_id')->references('id')->on('ccaa')->onDelete('cascade');
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class CreateCcaaTable extends Migration
         Schema::create('ccaa', function (Blueprint $table) {
             $table->increments('id');
             $table->string('autonomia');
-            $table->binary('image');
+            $table->string('image');
             $table->timestamps();
         });
     }
