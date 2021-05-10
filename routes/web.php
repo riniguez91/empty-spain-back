@@ -21,7 +21,7 @@ $router->post('/login', [
 ]); 
 
 $router->post('/register', 'UserController@register'); 
-$router->post('/scrapers/tripadvisor', 'BusquedaController@addSearch');
+$router->post('/addSearch', 'BusquedaController@addSearch');
 
 /* Route::prefix('auth')->group(function() {
     Route::post('/login', [UserController::class, 'authenticate']);

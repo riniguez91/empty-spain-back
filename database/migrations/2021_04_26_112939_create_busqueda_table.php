@@ -18,6 +18,9 @@ class CreateBusquedaTable extends Migration
             $table->integer('municipio_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
             $table->longtext('tripadvisor_info');
+            $table->longtext('twitter_info');
+            $table->longtext('tiempo_info');
+            $table->longtext('wiki_info');
             $table->string('search_date');
             $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('usuario')->onDelete('cascade');

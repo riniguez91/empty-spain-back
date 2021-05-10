@@ -36,6 +36,9 @@ class BusquedaController extends Controller
         $search = new Busqueda;
 
         $search->tripadvisor_info = $request->tripadvisor_info;
+        $search->twitter_info = $request->twitter_info;
+        $search->tiempo_info = $request->tiempo_info;
+        $search->wiki_info = $request->wiki_info;
         $search->search_date = $request->search_date;
         $search->municipio_id = $request->municipio_id;
         $search->usuario_id = $request->usuario_id;
