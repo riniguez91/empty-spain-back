@@ -20,7 +20,7 @@ INSERT INTO `ccaa` (`id`, `autonomia`, `image`) VALUES
 (19, 'Melilla (Ciudad de)', 'https://i.ibb.co/sj7vPHL/19-Melilla.jpg');
 
 INSERT INTO `provincias` (`id`, `provincia`, `image`, `ccaa_id`) VALUES
-(1, 'Araba/Álava', 'https://i.ibb.co/1K3SZhW/1-Alava.jpg', 16),
+(1, 'Araba/Álava', 'https://i.ibb.co/StdXw9K/1-Alava.jpg', 16),
 (2, 'Albacete', 'https://i.ibb.co/ZL7qftB/2-Albacete.jpg', 8),
 (3, 'Alicante/Alacant', 'https://i.ibb.co/hRZPWgN/3-Alicante.jpg', 10),
 (4, 'Almería', 'https://i.ibb.co/6sLvyN0/4-Almeria.jpg', 1),
