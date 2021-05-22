@@ -1,7 +1,4 @@
 <?php
-
-/** @var \Laravel\Lumen\Routing\Router $router */
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,16 +12,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-$router->post('/login', [
-    /* 'middleware' => 'cors',  */
-    'uses' => 'UserController@authenticate'
-]); 
+// PUBLIC ACCESS
+$router->post('/auth/login', 'AuthController@authenticate'); 
+$router->post('/auth/register', 'AuthController@register'); 
 
-$router->post('/register', 'UserController@register'); 
+// USER 
 $router->post('/addSearch', 'BusquedaController@addSearch');
 
-/* Route::prefix('auth')->group(function() {
-    Route::post('/login', [UserController::class, 'authenticate']);
-    Route::post('/register', [UserController::class, 'register']);
-}); */
-
+/* $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+    $router->post('/auth/login', 'AuthController@authenticate');
+});  */
