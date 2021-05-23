@@ -11,14 +11,16 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 // PUBLIC ACCESS
 $router->post('/auth/login', 'AuthController@authenticate'); 
 $router->post('/auth/register', 'AuthController@register'); 
 
 // USER 
-$router->post('/addSearch', 'BusquedaController@addSearch');
-
-/* $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
-    $router->post('/auth/login', 'AuthController@authenticate');
-});  */
+$router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+    $router->post('/addSearch', 'BusquedaController@addSearch');
+    $router->post('/municipios', function() { 
+        return DB::table('municipios')->select('id', 'municipio')->get(); 
+    });
+});  

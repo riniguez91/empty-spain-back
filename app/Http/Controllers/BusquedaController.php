@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Response;
 use App\Models\Busqueda;
+use App\Models\Municipios;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -48,5 +49,12 @@ class BusquedaController extends Controller
             'success' => true
         ], 200);
     }
+
+    /**
+     * Gets all the municipios from the db
+     * 
+     * @return 
+     */
+    public function getMunicipios() { return Municipios::all(); }
 
 }

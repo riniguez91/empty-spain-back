@@ -10,7 +10,7 @@ use Firebase\JWT\ExpiredException;
 class JwtMiddleware
 {
     public function handle($request, Closure $next, $guard = null) {
-        $token = $request->get('access_token');
+        $token = $request->header('Authorization');
 
         if (!$token) {
             // Unauthorized response since there is no token provided
@@ -22,7 +22,7 @@ class JwtMiddleware
         try {
             $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
         } catch (ExpiredException $e) {
-            return reponse()->json([
+            return response()->json([
                 'error' => 'Token has expired.'
             ], 401);
         } catch (Exception $e) {

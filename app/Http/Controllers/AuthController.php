@@ -40,7 +40,7 @@ class AuthController extends Controller
             'iss' => "lumen-jwt", // Issuer of the token
             'sub' => $user->id, // Subject of the token
             'iat' => time(), // Time when JWT was issued.
-            'exp' => time() + 3600*3600 // Expiration time
+            'exp' => time() + 3600   // Expiration time 3600
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));
@@ -49,7 +49,7 @@ class AuthController extends Controller
     /**
      * Authenticate a user and return token if the operation is a success
      * 
-     * @param \App\User $user
+     * @param \App\Models\User $user
      * @return json
      */
     public function authenticate(User $user) {
@@ -76,7 +76,9 @@ class AuthController extends Controller
             // OK response
             return response()->json([
                 'success' => true,
-                'access_token' => $access_token
+                'access_token' => $access_token,
+                'name' => $user->name,
+                'surnames' => $user->surnames
             ], 200);
         }
 
@@ -100,11 +102,12 @@ class AuthController extends Controller
             'email' => 'required|email|unique:usuario'
         ]);
 
+        // Bad request 400
         if ($validator->fails()) {
-            return array(
+            return response()->json([
                 'success' => false,
                 'message' => $validator->errors()->all()
-            ); 
+            ], 400); 
         }
 
         $user = new User;
