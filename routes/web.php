@@ -19,6 +19,7 @@ $router->post('/auth/register', 'AuthController@register');
 $router->get('/municipios', function() { 
     return DB::table('municipios')->select('id', 'municipio')->get(); 
 });
+$router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {

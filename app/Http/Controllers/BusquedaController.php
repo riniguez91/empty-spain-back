@@ -51,10 +51,20 @@ class BusquedaController extends Controller
     }
 
     /**
-     * Gets all the municipios from the db
+     * Gets information belonging to a municipio
      * 
-     * @return 
+     * @param Integer id
+     * @return json
      */
-    public function getMunicipios() { return Municipios::all(); }
+    public function municipioInfo(Request $request) {
+        $municipio = Municipios::where('id', $request->id)->first();
+        if ($municipio) {
+            return response()->json([
+                'id' => $municipio->id,
+                'municipio' => $municipio->municipio,
+                'superficie' => $municipio->superficie
+            ], 200);
+        }
+    }
 
 }
