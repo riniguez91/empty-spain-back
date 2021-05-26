@@ -57,7 +57,23 @@ class BusquedaController extends Controller
      */
     public function municipioInfo(Request $request) {
         $municipio = Municipios::where('id', $request->id)->first();
-        if ($municipio) {
+        $busqueda = Busqueda::where('municipio_id', $request->id)->first();
+
+        // Check if we have already scraped this town
+        if ($busqueda) {
+            return response()->json([
+                'scraped' => 'true',
+                'id' => $municipio->id,
+                'municipio' => $municipio->municipio,
+                'superficie' => $municipio->superficie,
+                'tripadvisor_info' => $busqueda->tripadvisor_info,
+                'twitter_info' => $busqueda->twitter_info,
+                'tiempo_info' => $busqueda->tiempo_info,
+                'wiki_info' => $busqueda->wiki_info
+            ], 200);
+        }
+        // Else return this for starters, will change in the future
+        else {
             return response()->json([
                 'id' => $municipio->id,
                 'municipio' => $municipio->municipio,
