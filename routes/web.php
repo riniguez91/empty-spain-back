@@ -20,8 +20,9 @@ $router->get('/municipios', function() {
     return DB::table('municipios')->select('id', 'municipio')->get(); 
 });
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
+$router->post('/addSearch', 'BusquedaController@addSearch');
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
-    $router->post('/addSearch', 'BusquedaController@addSearch');
+    
 });  
