@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Response;
 use App\Models\Busqueda;
 use App\Models\Municipios;
+use App\Models\Provincias;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -57,6 +58,7 @@ class BusquedaController extends Controller
      */
     public function municipioInfo(Request $request) {
         $municipio = Municipios::where('id', $request->id)->first();
+        $provincia = Provincias::where('id', $municipio->provincia_id)->first();
         $busqueda = Busqueda::where('municipio_id', $request->id)->first();
 
         // Check if we have already scraped this town
@@ -64,6 +66,7 @@ class BusquedaController extends Controller
             return response()->json([
                 'scraped' => 'true',
                 'id' => $municipio->id,
+                'provincia' => $provincia->provincia,
                 'municipio' => $municipio->municipio,
                 'superficie' => $municipio->superficie,
                 'tripadvisor_info' => $busqueda->tripadvisor_info,
@@ -76,6 +79,7 @@ class BusquedaController extends Controller
         else {
             return response()->json([
                 'id' => $municipio->id,
+                'provincia' => $provincia->provincia,
                 'municipio' => $municipio->municipio,
                 'superficie' => $municipio->superficie
             ], 200);
