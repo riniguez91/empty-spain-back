@@ -116,7 +116,7 @@ class AuthController extends Controller
         $user->surnames = $request->surnames;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role = $request->role;
+        $user->role = 0;
         $user->save();
 
         // We remove the password since we are returning the object back to the user
