@@ -43,6 +43,7 @@ class BusquedaController extends Controller
         $search->wiki_info = $request->wiki_info;
         $search->municipio_id = $request->municipio_id;
         $search->usuario_id = $request->usuario_id;
+        $search->municipio_state = $request->municipio_state;
         $search->save();
 
         return response()->json([
@@ -72,7 +73,8 @@ class BusquedaController extends Controller
                 'tripadvisor_info' => $busqueda->tripadvisor_info,
                 'twitter_info' => $busqueda->twitter_info,
                 'tiempo_info' => $busqueda->tiempo_info,
-                'wiki_info' => $busqueda->wiki_info
+                'wiki_info' => $busqueda->wiki_info,
+                'municipio_state' => $busqueda->municipio_state
             ], 200);
         }
         // Else return this for starters, will change in the future
