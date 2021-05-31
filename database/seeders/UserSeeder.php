@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'name' => $faker->Firstname,
                 'surnames' => $faker->Lastname,
                 'password' => Hash::make('password'),
-                'role' => random_int(1),
+                'role' => 1,
                 'updated_at' => date_create("now", timezone_open("Europe/Warsaw")),
                 'created_at' =>  date_create("now", timezone_open("Europe/Warsaw"))
             ]);
