@@ -43,6 +43,11 @@ class AuthController extends Controller
             'exp' => time() + 3600   // Expiration time 3600
         ];
 
+        // Check if it has admin role (no 1 = admin)
+        if ($user->role == 1)
+            // If it is then append admin payload
+            $payload['is_admin'] = 'true';
+
         return JWT::encode($payload, env('JWT_SECRET'));
     }
 
