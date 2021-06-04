@@ -79,6 +79,7 @@ $app->configure('app');
 
 $app->routeMiddleware([
     'jwt.auth' =>  App\Http\Middleware\JwtMiddleware::class, 
+    'admin' => App\Http\Middleware\DashboardMiddleware::class,
 ]);
 
 $app->middleware([

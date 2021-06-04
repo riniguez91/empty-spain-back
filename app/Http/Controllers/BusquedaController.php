@@ -54,7 +54,7 @@ class BusquedaController extends Controller
     /**
      * Gets information belonging to a municipio
      * 
-     * @param Integer id
+     * @param Request $request
      * @return json
      */
     public function municipioInfo(Request $request) {
@@ -86,6 +86,16 @@ class BusquedaController extends Controller
                 'superficie' => $municipio->superficie
             ], 200);
         }
+    }
+
+    /**
+     * Returns all municipios inside the db
+     * 
+     * @param Request $request
+     * @return query
+     */
+    public function getMunicipios(Request $request) {
+        return Municipios::select('id', 'municipio')->get();
     }
 
 }

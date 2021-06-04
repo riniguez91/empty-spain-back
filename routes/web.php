@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\DB;
 // PUBLIC ACCESS
 $router->post('/auth/login', 'AuthController@authenticate'); 
 $router->post('/auth/register', 'AuthController@register'); 
-$router->get('/municipios', function() { 
-    return DB::table('municipios')->select('id', 'municipio')->get(); 
-});
+$router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     
+});  
+
+// ADMIN 
+$router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router) {
+    $router->get('/users', 'DashboardController@getUsers');
 });  
