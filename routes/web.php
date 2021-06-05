@@ -28,4 +28,5 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
 // ADMIN 
 $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router) {
     $router->get('/users', 'DashboardController@getUsers');
+    $router->get('/mostSearchedMunicipios', 'DashboardController@getMostSearchedMunicipios');
 });  

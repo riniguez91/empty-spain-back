@@ -44,6 +44,7 @@ class BusquedaController extends Controller
         $search->municipio_id = $request->municipio_id;
         $search->usuario_id = $request->usuario_id;
         $search->municipio_state = $request->municipio_state;
+        $search->no_searches = 1;
         $search->save();
 
         return response()->json([
@@ -64,6 +65,8 @@ class BusquedaController extends Controller
 
         // Check if we have already scraped this town
         if ($busqueda) {
+            // Increment no_searches for this municipio
+            Busqueda::where($request->municipio_id)->increment('no_searches', 1);
             return response()->json([
                 'scraped' => 'true',
                 'id' => $municipio->id,

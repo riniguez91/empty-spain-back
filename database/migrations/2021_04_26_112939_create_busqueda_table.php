@@ -22,6 +22,7 @@ class CreateBusquedaTable extends Migration
             $table->longtext('tiempo_info');
             $table->longtext('wiki_info');
             $table->text('municipio_state');
+            $table->integer('no_searches')->default('0');
             $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('usuario')->onDelete('cascade');
             $table->timestamps();
