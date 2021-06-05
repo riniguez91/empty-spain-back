@@ -8195,9 +8195,3 @@ INSERT INTO `municipios` (`id`, `municipio`, `superficie`, `provincia_id`) VALUE
 (50903, 'Villamayor de Gállego', '89,36', 50),
 (51001, 'Ceuta', '19,48', 51),
 (52001, 'Melilla', '13,41', 52);
-
-INSERT INTO `usuario` (`id`, `email`, `name`, `surnames`, `password`, `role`, `updated_at`, `created_at`) VALUES
-(1, 'test7@test.com', 'TestRegister', 'test', '$2y$10$KpuvKZB5knABzdYjlWSNxOGjhhcot.4xfX40ZIySznHkgRi88qjKm', 1, '2021-04-26 20:20:31', '2021-04-26 20:20:31');
-
-INSERT INTO `busqueda` (`id`, `tripadvisor_info`, `search_date`, `municipio_id`, `usuario_id`, `updated_at`, `created_at`) VALUES
-(1, '{\"test\": \"test\"}', '2021-04-26 13:23:12', 1001, 1, '2021-04-26 20:20:43', '2021-04-26 20:20:43');
