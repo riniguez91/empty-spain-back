@@ -30,4 +30,5 @@ $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router)
     $router->get('/users', 'DashboardController@getUsers');
     $router->get('/mostSearchedMunicipios', 'DashboardController@getMostSearchedMunicipios');
     $router->get('/resetCcaaProvinciasMunicipios', 'DashboardController@ResetCcaaProvinciasMunicipios');
+    $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
 });  

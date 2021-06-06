@@ -102,4 +102,17 @@ class BusquedaController extends Controller
         return Municipios::select('id', 'municipio')->get();
     }
 
+    /**
+     * Gets the 4 highlighted municipios
+     * 
+     * @param Request $request 
+     * @return json
+     */
+    public function highlightedMunicipios(Request $request) {
+        return Busqueda::select('wiki_info')
+                        ->where('highlighted', 1)
+                        ->limit(4)
+                        ->get();
+    }
+
 }
