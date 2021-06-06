@@ -66,7 +66,8 @@ class BusquedaController extends Controller
         // Check if we have already scraped this town
         if ($busqueda) {
             // Increment no_searches for this municipio
-            Busqueda::where($request->municipio_id)->increment('no_searches', 1);
+            $busqueda->no_searches++;
+            $busqueda->save();
             return response()->json([
                 'scraped' => 'true',
                 'id' => $municipio->id,
