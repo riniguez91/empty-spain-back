@@ -10,6 +10,7 @@
 |
 */
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,7 @@ $router->post('/auth/register', 'AuthController@register');
 $router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
+$router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
@@ -30,5 +32,6 @@ $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router)
     $router->get('/users', 'DashboardController@getUsers');
     $router->get('/mostSearchedMunicipios', 'DashboardController@getMostSearchedMunicipios');
     $router->get('/resetCcaaProvinciasMunicipios', 'DashboardController@ResetCcaaProvinciasMunicipios');
-    $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
+    $router->get('/municipiosWithHighlighted', 'DashboardController@getMunicipiosWithHighlighted');
+    $router->post('/updateHighlighted', 'DashboardController@updateHighlighted');
 });  

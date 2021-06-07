@@ -43,6 +43,34 @@ class DashboardController extends Controller
     }
 
     /**
+     * Updated municipio highlighted column
+     * 
+     * @param Request $request 
+     * @return json
+     */
+    public function updateHighlighted(Request $request) {
+        $busqueda = Busqueda::where('municipio_id', $request->municipio_id)->first();
+        $busqueda->highlighted = $request->highlighted;
+        $busqueda->save();
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    /**
+     * Gets the highlighted municipios
+     * 
+     * @param Request $request
+     * @return json
+     */
+    public function getMunicipiosWithHighlighted(Request $request) {
+        return Busqueda::select('municipios.id', 'municipios.municipio', 'busqueda.highlighted')
+                ->join('municipios', 'busqueda.municipio_id', '=', 'municipios.id')
+                ->get();
+    }
+
+    /**
      * Gets the top 10 most searched municipios
      * 
      * @param Request $request 
