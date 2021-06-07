@@ -34,4 +34,7 @@ $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router)
     $router->get('/resetCcaaProvinciasMunicipios', 'DashboardController@ResetCcaaProvinciasMunicipios');
     $router->get('/municipiosWithHighlighted', 'DashboardController@getMunicipiosWithHighlighted');
     $router->post('/updateHighlighted', 'DashboardController@updateHighlighted');
+    $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
+    $router->post('/updateSearch', 'DashboardController@updateSearch');
+
 });  

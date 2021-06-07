@@ -104,4 +104,21 @@ class DashboardController extends Controller
             'Reset success' => true
         ], 200);
     }
+
+    /**
+     * Updates fields of a search with provided data in the Request variable
+     * 
+     * @param Request $request
+     * @return void
+     */
+    public function updateSearch(Request $request){
+        $variable = $request->field;
+        $busqueda = Busqueda::where('municipio_id', $request->townId)->first();
+        $busqueda-> $variable = $request->content; 
+        $busqueda->save(); 
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
 }
