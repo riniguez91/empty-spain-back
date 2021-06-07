@@ -21,13 +21,13 @@ class UserSeeder extends Seeder
         $faker = Faker::create();
         //DB::table('usuario')->delete(); borrar tabla antes de insertar
         //Añadir 3 usuarios de ejemplo
-        for($i=0; $i<3; $i++){
+        for($i=0; $i<15; $i++){
             DB::table('usuario')->insert([
                 'email' => $faker->Firstname.'@gmail.com',
                 'name' => $faker->Firstname,
                 'surnames' => $faker->Lastname,
                 'password' => Hash::make('password'),
-                'role' => 1,
+                'role' => random_int(0,1),
                 'updated_at' => date_create("now", timezone_open("Europe/Warsaw")),
                 'created_at' =>  date_create("now", timezone_open("Europe/Warsaw"))
             ]);
