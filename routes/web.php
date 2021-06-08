@@ -21,7 +21,7 @@ $router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
-$router->get('/getDespoblacion', 'DashboardController@getDespoblacion');
+
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
@@ -38,4 +38,5 @@ $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router)
     $router->get('/municipiosWithHighlighted', 'DashboardController@getMunicipiosWithHighlighted');
     $router->post('/updateHighlighted', 'DashboardController@updateHighlighted');
     $router->post('/updateSearch', 'DashboardController@updateSearch');
+    $router->get('/getDespoblacion', 'DashboardController@getDespoblacion');
 });  
