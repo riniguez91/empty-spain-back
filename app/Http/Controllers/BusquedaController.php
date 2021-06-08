@@ -114,7 +114,8 @@ class BusquedaController extends Controller
                 'twitter_info' => $busqueda->twitter_info,
                 'tiempo_info' => $busqueda->tiempo_info,
                 'wiki_info' => $busqueda->wiki_info,
-                'municipio_state' => $busqueda->municipio_state
+                'municipio_state' => $busqueda->municipio_state,
+                'updated_at'=> $busqueda->updated_at
             ], 200);
         }
         // Else return this for starters, will change in the future
