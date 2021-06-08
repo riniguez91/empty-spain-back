@@ -71,6 +71,12 @@ class AuthController extends Controller
             ], 400);
         }
 
+        if ($user->is_disabled) {
+            return response()->json([
+                'error' => 'User is disabled'
+            ], 400);
+        }
+
         // Checks the password and returns token if succesful
         if (Hash::check($this->request->password, $user->password)) {
             // We set the jwt token on the db
