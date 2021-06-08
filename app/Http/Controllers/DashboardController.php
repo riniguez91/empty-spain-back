@@ -39,7 +39,8 @@ class DashboardController extends Controller
      * @return json
      */
     public function getUsers(Request $request) {
-        return User::all();
+        return User::select('id', 'email', 'name', 'surnames', 'role', 'is_disabled')
+               ->get();
     }
 
     /**
