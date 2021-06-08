@@ -44,6 +44,37 @@ class DashboardController extends Controller
     }
 
     /**
+     * Update user credentials
+     * 
+     * @param Request $request 
+     * @return json
+     */
+    public function updateUserCredentials(Request $request) {
+        $user = User::where('id', $request->user_id)->first();
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->surnames = $request->surnames;
+        $user->role = $request->role;
+        $user->is_disabled = $request->is_disabled;
+        $user->save();
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    /**
+     * Delete user PERMANENTLY from the db
+     */
+    public function deleteUser(Request $request) {
+        $user = User::where('id', $request->user_id)->delete();
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    /**
      * Updated municipio highlighted column
      * 
      * @param Request $request 

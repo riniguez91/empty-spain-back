@@ -30,10 +30,11 @@ $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
 // ADMIN 
 $router->group(['middleware' => ['jwt.auth', 'admin']], function() use ($router) {
     $router->get('/users', 'DashboardController@getUsers');
+    $router->post('/updateUser', 'DashboardController@updateUserCredentials');
+    $router->post('/deleteUser', 'DashboardController@deleteUser');
     $router->get('/mostSearchedMunicipios', 'DashboardController@getMostSearchedMunicipios');
     $router->get('/resetCcaaProvinciasMunicipios', 'DashboardController@ResetCcaaProvinciasMunicipios');
     $router->get('/municipiosWithHighlighted', 'DashboardController@getMunicipiosWithHighlighted');
     $router->post('/updateHighlighted', 'DashboardController@updateHighlighted');
     $router->post('/updateSearch', 'DashboardController@updateSearch');
-
 });  
