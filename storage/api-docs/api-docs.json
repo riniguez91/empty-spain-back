@@ -1,0 +1,767 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Empty Spain API",
+        "contact": {
+            "name": "Grupo 5 Support Team",
+            "email": "grupo5@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": "Checks if the user is in the database",
+                "operationId": "App\\Http\\Controllers\\AuthController::authenticate",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "Ronaldo@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Email or password invalid"
+                    },
+                    "200": {
+                        "description": "Success since the user credentials are correct."
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": "Register a user",
+                "operationId": "App\\Http\\Controllers\\AuthController::register",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "surnames",
+                                    "password",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/components/schemas/User/properties/name"
+                                    },
+                                    "surnames": {
+                                        "$ref": "#/components/schemas/User/properties/surnames"
+                                    },
+                                    "password": {
+                                        "$ref": "#/components/schemas/User/properties/password"
+                                    },
+                                    "email": {
+                                        "$ref": "#/components/schemas/User/properties/email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Validator fail such as email is not unique"
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/addSearch": {
+            "post": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": "Add search info after a user searches a municipio",
+                "operationId": "App\\Http\\Controllers\\BusquedaController::addSearch",
+                "requestBody": {
+                    "description": "JSON containing scraper info",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "tripadvisor_info",
+                                    "twitter_info",
+                                    "tiempo_info",
+                                    "wiki_info",
+                                    "municipio_id",
+                                    "usuario_id",
+                                    "municipio_state"
+                                ],
+                                "properties": {
+                                    "tripadvisor_info": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/tripadvisor_info"
+                                    },
+                                    "twitter_info": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/twitter_info"
+                                    },
+                                    "tiempo_info": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/tiempo_info"
+                                    },
+                                    "wiki_info": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/wiki_info"
+                                    },
+                                    "municipio_id": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/municipio_id"
+                                    },
+                                    "usuario_id": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/usuario_id"
+                                    },
+                                    "municipio_state": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/municipio_state"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/municipios/{id}": {
+            "get": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": " Gets information belonging to a municipio",
+                "operationId": "App\\Http\\Controllers\\BusquedaController::municipioInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the municipio",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "2045"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/municipios": {
+            "get": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": "Obtain the information belonging to all the municipios in the database",
+                "operationId": "App\\Http\\Controllers\\BusquedaController::getMunicipios",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/highlightedMunicipios": {
+            "get": {
+                "tags": [
+                    "Public access"
+                ],
+                "summary": "Gets the wikipedia scraper info for four highlighted municipios",
+                "operationId": "App\\Http\\Controllers\\BusquedaController::highlightedMunicipios",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Gets all users records (except sensitive data such as password)",
+                "operationId": "App\\Http\\Controllers\\DashboardController::getUsers",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Returns when user is not authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Token not provided"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/updateUser": {
+            "post": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Update user credentials",
+                "operationId": "App\\Http\\Controllers\\DashboardController::updateUserCredentials",
+                "requestBody": {
+                    "description": "JSON containing user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "name",
+                                    "surnames",
+                                    "role",
+                                    "is_disabled"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "$ref": "#/components/schemas/User/properties/email"
+                                    },
+                                    "name": {
+                                        "$ref": "#/components/schemas/User/properties/name"
+                                    },
+                                    "surnames": {
+                                        "$ref": "#/components/schemas/User/properties/surnames"
+                                    },
+                                    "role": {
+                                        "$ref": "#/components/schemas/User/properties/role"
+                                    },
+                                    "is_disabled": {
+                                        "$ref": "#/components/schemas/User/properties/is_disabled"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/deleteUser": {
+            "post": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Delete user permanently from the db",
+                "operationId": "App\\Http\\Controllers\\DashboardController::deleteUser",
+                "requestBody": {
+                    "description": "JSON containing user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "#/components/schemas/User/properties/id"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/updateHighlighted": {
+            "post": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Updated municipio highlighted column",
+                "operationId": "App\\Http\\Controllers\\DashboardController::updateHighlighted",
+                "requestBody": {
+                    "description": "JSON containing municipio id and highlighted value",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "highlighted"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "#/components/schemas/Municipios/properties/id"
+                                    },
+                                    "highlighted": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/highlighted"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/municipiosWithHighlighted": {
+            "get": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Gets the highlighted municipios",
+                "operationId": "App\\Http\\Controllers\\DashboardController::getMunicipiosWithHighlighted",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/mostSearchedMunicipios": {
+            "get": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Gets the top 10 most searched municipios",
+                "operationId": "App\\Http\\Controllers\\DashboardController::getMostSearchedMunicipios",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/resetCcaaProvinciasMunicipios": {
+            "get": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Deletes municipios, provincias and CCAA columns from database and calls SqlSeeder to add them again",
+                "operationId": "App\\Http\\Controllers\\DashboardController::ResetCcaaProvinciasMunicipios",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Reset success": {
+                                            "type": "string",
+                                            "example": "True"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/updateSearch": {
+            "post": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Updates fields of a search with provided data in the request body",
+                "operationId": "App\\Http\\Controllers\\DashboardController::updateSearch",
+                "requestBody": {
+                    "description": "JSON containing municipio id and column to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "tripadvisor_info"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "#/components/schemas/Municipios/properties/id"
+                                    },
+                                    "tripadvisor_info": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/tripadvisor_info"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/getDespoblacion": {
+            "get": {
+                "tags": [
+                    "Admin access"
+                ],
+                "summary": "Get count of municpio_state of all the municipios",
+                "operationId": "App\\Http\\Controllers\\DashboardController::getDespoblacion",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Reset success": {
+                                            "type": "string",
+                                            "example": "True"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Busqueda": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "municipio_id": {
+                        "description": "FK from municipio table",
+                        "type": "integer",
+                        "example": "2045"
+                    },
+                    "usuario_id": {
+                        "description": "FK from usuario table",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "tripadvisor_info": {
+                        "description": "Stringified JSON containing the result from tripadvisor scraper",
+                        "type": "string"
+                    },
+                    "twitter_info": {
+                        "description": "Stringified JSON containing the result from twitter scraper",
+                        "type": "string"
+                    },
+                    "tiempo_info": {
+                        "description": "Stringified JSON containing the result from tiempo scraper",
+                        "type": "string"
+                    },
+                    "wiki_info": {
+                        "description": "Stringified JSON containing the result from wiki scraper",
+                        "type": "string"
+                    },
+                    "municipio_state": {
+                        "description": "State of the municipio regarding 'empty spain'",
+                        "type": "string",
+                        "example": "Despoblacion"
+                    },
+                    "highlighted": {
+                        "description": "Determines if the town is highlighted on the main search page",
+                        "type": "boolean",
+                        "example": "1"
+                    },
+                    "no_searches": {
+                        "description": "No. of times a municipio has been searched",
+                        "type": "integer",
+                        "example": "654"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Busqueda"
+                }
+            },
+            "CCAA": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "autonomia": {
+                        "description": "Autonomia name",
+                        "type": "string",
+                        "example": "Andalucia"
+                    },
+                    "image": {
+                        "description": "Image URL",
+                        "type": "string",
+                        "example": "https://i.ibb.co/MkyqFkv/Andalucia.jpg"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CCAA"
+                }
+            },
+            "Municipios": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "provincia_id": {
+                        "description": "FK from provincia table",
+                        "type": "integer",
+                        "example": "9"
+                    },
+                    "municipio": {
+                        "description": "Municipio name",
+                        "type": "string",
+                        "example": "Barrundia"
+                    },
+                    "superficie": {
+                        "description": "Superficie size in squared km",
+                        "type": "double",
+                        "example": "19.95"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Municipio"
+                }
+            },
+            "Provincias": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "ccaa_id": {
+                        "description": "FK from CCAA table",
+                        "type": "integer",
+                        "example": "13"
+                    },
+                    "provincia": {
+                        "description": "Provincia name",
+                        "type": "string",
+                        "example": "Albacete"
+                    },
+                    "image": {
+                        "description": "Image URL",
+                        "type": "string",
+                        "example": "https://i.ibb.co/ZL7qftB/2-Albacete.jpg"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Provincia"
+                }
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "email": {
+                        "description": "User unique email address",
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@gmail.com"
+                    },
+                    "name": {
+                        "description": "User name",
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "surnames": {
+                        "description": "User surnames",
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "password": {
+                        "description": "Encoded password",
+                        "type": "string",
+                        "example": "$2y$10$LGHRoMB25RZUsWsDhZoQKO9ZpxnFO1GLIggRGtxXIpjP0JgbNaTbC"
+                    },
+                    "role": {
+                        "description": "User role (0->user, 1->admin)",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "0"
+                    },
+                    "is_disabled": {
+                        "description": "Determines if the user is disabled and has no access to the web",
+                        "type": "boolean",
+                        "example": "0"
+                    },
+                    "access_token": {
+                        "description": "JWT Token generated from the web service",
+                        "type": "string",
+                        "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjEsImlhdCI6MTYyMzE2MTYxMywiZXhwIjoxNjIzMTY1MjEzLCJpc19hZG1pbiI6InRydWUifQ.wXsJ459zlnth9soCG4z8W9Fsu6ttqRFOXRhCHrph0Ao"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        }
+    }
+}

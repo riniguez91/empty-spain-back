@@ -29,10 +29,29 @@ class BusquedaController extends Controller
 
 
     /**
-     * Insert JSON 
-     * 
-     * @param Request $request
-     * @return json
+     * @OA\Post(
+     * path="/addSearch",
+     * summary="Add search info after a user searches a municipio",
+     * tags={"Public access"},
+     * @OA\RequestBody(
+     *     required=true,
+     *     description="JSON containing scraper info",
+     *     @OA\JsonContent(
+     *          required={"tripadvisor_info", "twitter_info", "tiempo_info", "wiki_info", "municipio_id", "usuario_id", "municipio_state"},
+     *          @OA\Property(property="tripadvisor_info", ref="#/components/schemas/Busqueda/properties/tripadvisor_info"),
+     *          @OA\Property(property="twitter_info", ref="#/components/schemas/Busqueda/properties/twitter_info"),
+     *          @OA\Property(property="tiempo_info", ref="#/components/schemas/Busqueda/properties/tiempo_info"),
+     *          @OA\Property(property="wiki_info", ref="#/components/schemas/Busqueda/properties/wiki_info"),
+     *          @OA\Property(property="municipio_id", ref="#/components/schemas/Busqueda/properties/municipio_id"),
+     *          @OA\Property(property="usuario_id", ref="#/components/schemas/Busqueda/properties/usuario_id"),
+     *          @OA\Property(property="municipio_state", ref="#/components/schemas/Busqueda/properties/municipio_state"),
+     *      ),
+     * ),   
+     * @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  )
+     * )
      */
     public function addSearch(Request $request) {
         $search = new Busqueda;
@@ -52,12 +71,29 @@ class BusquedaController extends Controller
         ], 200);
     }
 
+
     /**
-     * Gets information belonging to a municipio
-     * 
-     * @param Request $request
-     * @return json
-     */
+     * @OA\Get(
+     * path="/municipios/{id}",
+     * summary=" Gets information belonging to a municipio",
+     * tags={"Public access"},
+     * @OA\Parameter(
+     *      description="ID of the municipio",
+     *      in="path",
+     *      name="id",
+     *      required=true,
+     *      example="2045",
+     *      @OA\Schema(
+     *          type="integer",
+     *          format="int64"
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  )
+     * )
+    */
     public function municipioInfo(Request $request) {
         $municipio = Municipios::where('id', $request->id)->first();
         $provincia = Provincias::where('id', $municipio->provincia_id)->first();
@@ -93,20 +129,30 @@ class BusquedaController extends Controller
     }
 
     /**
-     * Returns all municipios inside the db
-     * 
-     * @param Request $request
-     * @return query
+     * @OA\Get(
+     * path="/municipios",
+     * summary="Obtain the information belonging to all the municipios in the database",
+     * tags={"Public access"},
+     * @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  )
+     * )
      */
     public function getMunicipios(Request $request) {
         return Municipios::select('id', 'municipio')->get();
     }
 
     /**
-     * Gets the 4 highlighted municipios
-     * 
-     * @param Request $request 
-     * @return json
+     * @OA\Get(
+     * path="/highlightedMunicipios",
+     * summary="Gets the wikipedia scraper info for four highlighted municipios",
+     * tags={"Public access"},
+     * @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  )
+     * )
      */
     public function highlightedMunicipios(Request $request) {
         return Busqueda::select('wiki_info')

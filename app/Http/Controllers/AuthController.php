@@ -52,10 +52,28 @@ class AuthController extends Controller
     }
 
     /**
-     * Authenticate a user and return token if the operation is a success
-     * 
-     * @param \App\Models\User $user
-     * @return json
+     * @OA\Post(
+     * path="/auth/login",
+     * summary="Checks if the user is in the database",
+     * tags={"Public access"},
+     * @OA\RequestBody(
+     *     required=true,
+     *     description="User credentials",
+     *     @OA\JsonContent(
+     *          required={"email", "password"},
+     *          @OA\Property(property="email", type="string", format="email", example="Ronaldo@gmail.com"),
+     *          @OA\Property(property="password", type="string", format="password", example="password")
+     *      ),
+     * ),     
+     * @OA\Response(
+     *      response=400,
+     *      description="Email or password invalid"
+     *  ),
+     * @OA\Response(
+     *      response=200,
+     *      description="Success since the user credentials are correct."
+     *  )
+     * )
      */
     public function authenticate(User $user) {
         $this->validate($this->request, [
@@ -100,10 +118,30 @@ class AuthController extends Controller
     }
 
     /**
-     * Register a user
-     * 
-     * @param Request $request
-     * @return json
+     * @OA\Post(
+     * path="/auth/register",
+     * summary="Register a user",
+     * tags={"Public access"},
+     * @OA\RequestBody(
+     *     required=true,
+     *     description="User credentials",
+     *     @OA\JsonContent(
+     *          required={"name", "surnames", "password", "email"},
+     *          @OA\Property(property="name", ref="#/components/schemas/User/properties/name"),
+     *          @OA\Property(property="surnames", ref="#/components/schemas/User/properties/surnames"),
+     *          @OA\Property(property="password", ref="#/components/schemas/User/properties/password"),
+     *          @OA\Property(property="email", ref="#/components/schemas/User/properties/email")
+     *      ),
+     * ),     
+     * @OA\Response(
+     *      response=400,
+     *      description="Validator fail such as email is not unique"
+     *  ),
+     * @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  )
+     * )
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [

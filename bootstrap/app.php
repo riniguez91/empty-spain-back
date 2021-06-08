@@ -24,8 +24,9 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-
 $app->withEloquent();
+
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -72,11 +73,6 @@ $app->configure('app');
 |
 */
 
-/* $app->routeMiddleware([
-    'jwt.auth' => App\Http\Middleware\JwtMiddleware::class, 
-    'cors' => App\Http\Middleware\CorsMiddleware::class,
-]);  */
-
 $app->routeMiddleware([
     'jwt.auth' =>  App\Http\Middleware\JwtMiddleware::class, 
     'admin' => App\Http\Middleware\DashboardMiddleware::class,
@@ -85,10 +81,6 @@ $app->routeMiddleware([
 $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
 ]); 
-
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +96,7 @@ $app->middleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

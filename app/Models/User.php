@@ -9,6 +9,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
+
+/**
+ *
+ * @OA\Schema(
+ * @OA\Xml(name="User"),
+ * @OA\Property(property="id", type="integer", description="Database PK", example="1"),
+ * @OA\Property(property="email", type="string", format="email", description="User unique email address", example="user@gmail.com"),
+ * @OA\Property(property="name", type="string", description="User name", example="John"),
+ * @OA\Property(property="surnames", type="string", description="User surnames", example="Doe"),
+ * @OA\Property(property="password", type="string", description="Encoded password", example="$2y$10$LGHRoMB25RZUsWsDhZoQKO9ZpxnFO1GLIggRGtxXIpjP0JgbNaTbC"),
+ * @OA\Property(property="role", type="integer", readOnly="true", description="User role (0->user, 1->admin)", example="0"),
+ * @OA\Property(property="is_disabled", type="boolean", description="Determines if the user is disabled and has no access to the web", example="0"),
+ * @OA\Property(property="access_token", type="string", description="JWT Token generated from the web service", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjEsImlhdCI6MTYyMzE2MTYxMywiZXhwIjoxNjIzMTY1MjEzLCJpc19hZG1pbiI6InRydWUifQ.wXsJ459zlnth9soCG4z8W9Fsu6ttqRFOXRhCHrph0Ao"),
+ * @OA\Property(property="created_at", type="string", format="date-time", description="Initial creation timestamp"),
+ * @OA\Property(property="updated_at", type="string", format="date-time", description="Last update timestamp")
+ * )
+ *
+ * Class User
+ *
+ */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
