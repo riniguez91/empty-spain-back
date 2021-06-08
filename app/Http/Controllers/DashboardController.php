@@ -153,4 +153,9 @@ class DashboardController extends Controller
             'success' => true
         ], 200);
     }
+
+    public function getDespoblacion(Request $request){
+        $state = Busqueda::groupBy('municipio_state')->select('municipio_state', DB::raw('count(*) as total'))->get();
+        return $state;    
+    }
 }

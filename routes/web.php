@@ -21,6 +21,7 @@ $router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
+$router->get('/getDespoblacion', 'DashboardController@getDespoblacion');
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
