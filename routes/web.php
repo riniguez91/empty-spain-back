@@ -21,6 +21,7 @@ $router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
+$router->post('/insertTiempoExamen', 'BusquedaController@insertJson');
 
 
 // USER 

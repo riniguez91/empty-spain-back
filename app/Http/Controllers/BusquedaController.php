@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\Busqueda;
 use App\Models\Municipios;
 use App\Models\Provincias;
+use App\Models\Examen;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -25,6 +26,21 @@ class BusquedaController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Insert tiempo json en bd
+     */
+    public function insertJson(Request $request) {
+        $examen = new Examen;
+
+        $examen->examen_tiempo = $request->examen_tiempo;
+        $examen->save();
+
+        return response()->json([
+            'success' => true
+        ], 200); 
+
     }
 
 
