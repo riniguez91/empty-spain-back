@@ -21,6 +21,10 @@ $router->get('/municipios', 'BusquedaController@getMunicipios');
 $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
+$router->get('/getCheckpoint', 'DashboardController@getCheckpoint');
+$router->post('/insertCheckpoint', 'DashboardController@insertCheckpoint');
+$router->post('/updateCheckpoint', 'DashboardController@updateCheckpoint');
+$router->post('/deleteCheckpoint', 'DashboardController@deleteCheckpoint');
 
 
 // USER 

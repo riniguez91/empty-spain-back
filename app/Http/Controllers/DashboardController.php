@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Busqueda;
 use App\Models\Municipios;
 use App\Models\Provincias;
+use App\Models\Checkpoint;
 use App\Models\CCAA;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -281,4 +282,39 @@ class DashboardController extends Controller
         $state = Busqueda::groupBy('municipio_state')->select('municipio_state', DB::raw('count(*) as total'))->get();
         return $state;    
     }
+
+
+    public function getCheckpoint(){
+        $state = Checkpoint::select('id_checkpoint', 'content', 'mas_content')->get();
+        return $state;    
+    }
+    public function insertCheckpoint(Request $request){
+        $prueba = new Checkpoint;
+        $prueba->id_checkpoint = $request->id_checkpoint;
+        $prueba->content = $request->content;
+        $prueba->mas_content = $request->mas_content;
+        $prueba->save();
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    public function updateCheckpoint(Request $request){
+        Checkpoint::where('id_checkpoint', $request->id_checkpoint)->update([$request->field => $request->content, 
+                                                                'mas_content'=>$request->mas_content]);
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
+    public function deleteCheckpoint(Request $request) {
+        $prueba = Checkpoint::where('id_checkpoint', $request->id_checkpoint)->delete();
+
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
 }
