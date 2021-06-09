@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\Busqueda;
 use App\Models\Municipios;
+use App\Models\Victor;
 use App\Models\Provincias;
 use App\Models\CCAA;
 use Illuminate\Http\Request;
@@ -281,4 +282,16 @@ class DashboardController extends Controller
         $state = Busqueda::groupBy('municipio_state')->select('municipio_state', DB::raw('count(*) as total'))->get();
         return $state;    
     }
+
+    public function addVictor(Request $request){
+        $check = new Victor;
+
+        $check->id_checkpoint = $request->id_checkpoint;
+        $check->twitter_checkpoint = $request->twitter_checkpoint;
+        $check->save();
+        return response()->json([
+            'success' => true
+        ], 200);
+    }
+
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2021 a las 23:16:43
+-- Tiempo de generación: 09-06-2021 a las 14:10:53
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -8353,6 +8353,26 @@ INSERT INTO `provincias` (`id`, `ccaa_id`, `provincia`, `image`, `created_at`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `twitter_victor`
+--
+
+CREATE TABLE `twitter_victor` (
+  `id_checkpoint` int(11) NOT NULL,
+  `twitter_checkpoint` text NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `twitter_victor`
+--
+
+INSERT INTO `twitter_victor` (`id_checkpoint`, `twitter_checkpoint`, `updated_at`, `created_at`) VALUES
+(2, '{\"Day\":\"9 Jun\",\"Max temp\":\"33°\",\"Min temp\":\"18°\",\"Rain\":\"0 mm\",\"Wind\":\"15 km/h\",\"Day dawn\":\" 06:45 \",\"Day nightfall\":\"21:44\"}[{\"Tweet_No_vic\":\"1\",\"Date_vic\":\"2021-06-09 11:59:11+00:00\",\"ID_Username_vic\":\"1402596131734011906 - PreventMadrid\",\"Content_vic\":\"Si #Madrid suele abrir las #piscinas el 15 de mayo, no ocurre lo mismo con el resto de #Municipios. La mayoría esperan a #Junio para inaugurar su temporada de #verano. Lo mismo sucede en el caso de las #PiscinasComunitarias en Comunidades de #Vecinos \\nhttps://t.co/qqI5OLMrmM https://t.co/GsLKtMRsOR https://t.co/Fil5nnJjKy\",\"Sentiment_vic\":0.06},{\"Tweet_No_vic\":\"2\",\"Date_vic\":\"2021-06-09 11:59:08+00:00\",\"ID_Username_vic\":\"1402596118056390656 - elboletinmadrid\",\"Content_vic\":\"Madrid cuestiona la vacunación a la Selección: “No tiene sentido plantearlo en este momento” https://t.co/xSHdsE6aOP #Madrid #VacunaSeleccionESp #Coronavirus\",\"Sentiment_vic\":0},{\"Tweet_No_vic\":\"3\",\"Date_vic\":\"2021-06-09 11:58:01+00:00\",\"ID_Username_vic\":\"1402595840355602434 - sobacosudoroso\",\"Content_vic\":\"pero que esta pasando con las notas de la sele que ahora todo el mundo esta con treces? #Madrid #EVAU\",\"Sentiment_vic\":0},{\"Tweet_No_vic\":\"4\",\"Date_vic\":\"2021-06-09 11:57:27+00:00\",\"ID_Username_vic\":\"1402595695333347328 - VidaDeMadrid\",\"Content_vic\":\"Algo totalmente diferente llega a #Madrid en unos días: Estreno mundial de ‘Bounce by Circa’ en los #VeranosdelaVilla2021.\\n\\nNueva experiencia sensorial e inmersiva en una estructura inflable en forma de nube\\nhttps://t.co/NDMB89kq0W\\n\\n@CircaPresents\",\"Sentiment_vic\":-0.02},{\"Tweet_No_vic\":\"5\",\"Date_vic\":\"2021-06-09 11:57:05+00:00\",\"ID_Username_vic\":\"1402595602773467138 - KOKOROALMA\",\"Content_vic\":\"¡¡YA EN AMAZON!! #PAPEL y #KINDLE MEMORIA DEL PARAÍSO. ¿De verdad estás preparado para acompañar a este chico al #Madrid suburbial de #posguerra? ¡Escucha su #historia: Es real! PAPEL: https://t.co/sbFRDzw1K4 KINDLE: https://t.co/4F9CM2Mx6i https://t.co/8j4ITCayvq\",\"Sentiment_vic\":0.15},{\"Tweet_No_vic\":\"6\",\"Date_vic\":\"2021-06-09 11:55:03+00:00\",\"ID_Username_vic\":\"1402595092062519299 - DominiodeTares\",\"Content_vic\":\"¿Has probado comida mexicana con nuestro #vino Cepas Viejas?\\nTe lo recomendamos con lo Tacos Mex de Camarón #restaurante  Macarena de #Madrid\\n\\nEsta es nuestra recomendación #gastrovinícola @DOBierzo #winelover https://t.co/FnmnoyVxXJ\",\"Sentiment_vic\":0},{\"Tweet_No_vic\":\"7\",\"Date_vic\":\"2021-06-09 11:54:48+00:00\",\"ID_Username_vic\":\"1402595029655252994 - ManagerTravels1\",\"Content_vic\":\"Check Out The Wonderful Places in Spain\\n#travel #barcelona #love \\n#rooftop #roof #photography #sunset #architecture \\n#camino #caminodesantiago #buencamino\\n#plazamayor #madrid #a #espa #spain #guayaquil \\n#jewish #israel #judaism #kosher #jew #jerusalem \\n#managertravles https://t.co/Qaq2DFWl5z\",\"Sentiment_vic\":0.5},{\"Tweet_No_vic\":\"8\",\"Date_vic\":\"2021-06-09 11:54:46+00:00\",\"ID_Username_vic\":\"1402595020633427972 - FSEzM\",\"Content_vic\":\"Desde la Fundación San Ezequiel Moreno en Madrid os recordamos que también os esperamos para ofreceros nuestros servicios desde agencia de colocación. Aumenta tus posibilidades de inserción, llámanos! 91 724 15 93 / 622 259 179 #empleo #madrid #FSEM #ofertas https://t.co/q9hl4MYoB3\",\"Sentiment_vic\":0},{\"Tweet_No_vic\":\"9\",\"Date_vic\":\"2021-06-09 11:54:41+00:00\",\"ID_Username_vic\":\"1402594999561302018 - Apreca_Madrid\",\"Content_vic\":\"Ayudas del Plan Cambia 360 del Ayuntamiento de Madrid\\n\\nhttps://t.co/JMGFN6at63\\n\\n#ayudas #climatizacion #calderas #pymes #Madrid https://t.co/W3D9NN8h0d\",\"Sentiment_vic\":0},{\"Tweet_No_vic\":\"10\",\"Date_vic\":\"2021-06-09 11:54:19+00:00\",\"ID_Username_vic\":\"1402594908448428046 - ciclbh\",\"Content_vic\":\"Algunos cumunolimbus aislados ayer al Sur de Madrid en la aproximación a la 36L #Madrid #Barajas\\nA350-9 vuelo espec. Casablanca @iberia\\nA320 Lanzarote @iberiaexpress\\n@tiempobrasero @Tiempo_Mercedes @HimarGonzalez @A3Noticias https://t.co/YMbRwwEPe3\",\"Sentiment_vic\":0}]', '2021-06-09 12:00:14', '2021-06-09 12:00:14');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -8375,7 +8395,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `email`, `name`, `surnames`, `password`, `role`, `is_disabled`, `access_token`, `created_at`, `updated_at`) VALUES
 (1, 'Seth@gmail.com', 'Alfonzo', 'Gulgowski', '$2y$10$3MVkgUzOmV8PLnPuL8R6j.t.sBkd8qlZjhCDXBaFZdbkmf1TJixaG', 0, 0, NULL, '2021-06-08 23:12:23', '2021-06-08 23:12:23'),
-(2, 'Sunny@gmail.com', 'Oswald', 'Considine', '$2y$10$zX.scHMX7o/6rDhi.y1XP.2Fh7Rd2m7OER/SzvsJI.T85ngLdEqUu', 1, 0, NULL, '2021-06-08 23:12:24', '2021-06-08 23:12:24'),
+(2, 'Sunny@gmail.com', 'Oswald', 'Considine', '$2y$10$zX.scHMX7o/6rDhi.y1XP.2Fh7Rd2m7OER/SzvsJI.T85ngLdEqUu', 1, 0, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjIsImlhdCI6MTYyMzIzNzY4MywiZXhwIjoxNjIzMjQxMjgzLCJpc19hZG1pbiI6InRydWUifQ.Yl3R_eaxY3a4ir-sbPuCfQzDDtwmxV8vtqYkT8LMaNY', '2021-06-08 23:12:24', '2021-06-09 11:21:23'),
 (3, 'Chadrick@gmail.com', 'Marge', 'Koepp', '$2y$10$6pmGwVKj8chCESAEUckym.fJrfeh5u.iQd8zBw2jfrqPlZbEhJyqG', 1, 0, NULL, '2021-06-08 23:12:24', '2021-06-08 23:12:24'),
 (4, 'Tanya@gmail.com', 'Virginia', 'McGlynn', '$2y$10$1zhTseOo7ZE/gmzkpcX7heEuEntFW6x2JxxNZKhrwI4r0Ax1gM.FG', 0, 0, NULL, '2021-06-08 23:12:24', '2021-06-08 23:12:24'),
 (5, 'Carmine@gmail.com', 'Jana', 'Hegmann', '$2y$10$KoSsy2CuDl.hCfuTL5ADAOu19i2slHy4cdRdroYU.Hz0nrB8ep8Em', 0, 0, NULL, '2021-06-08 23:12:24', '2021-06-08 23:12:24'),
