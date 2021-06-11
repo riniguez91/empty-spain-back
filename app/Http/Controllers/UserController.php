@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use App\Models\User;
-use Firebase\JWT\JWT;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -30,19 +25,21 @@ class UserController extends Controller
     }
 
     /**
-     * Create a new token
+     * ss
      * 
-     * @param \App\Models\User $user
-     * @return void
+     * @return 
+     * SELECT * FROM busqueda WHERE busqueda.id IN (SELECT busqueda_id FROM user_busqueda WHERE user_id = 6)
      */
-    public function generateJWT(User $user) {
-        $payload = [
-            'iss' => "lumen-jwt", // Issuer of the token
-            'sub' => $user->id, // Subject of the token
-            'iat' => time(), // Time when JWT was issued.
-            'exp' => time() + 3600*3600 // Expiration time
-        ];
-
-        return JWT::encode($payload, env('JWT_SECRET'));
+    public function getUserSearches(Request $request) {
+        $user_id = $request->user_id;
+        return DB::table('busqueda')
+        ->select('wiki_info', 'municipio_id', 'municipio') 
+        ->whereIn('busqueda.id', function($query) use ($user_id) {
+            $query->select('busqueda_id')
+            ->from('user_busqueda')
+            ->where('user_id', '=', $user_id);
+        })
+        ->join('municipios', 'busqueda.municipio_id', '=', 'municipios.id')
+        ->get();
     }
 }

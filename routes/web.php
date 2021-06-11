@@ -11,6 +11,7 @@
 */
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,7 @@ $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
-    
+    $router->post('/userSearchHistory', 'UserController@getUserSearches');
 });  
 
 // ADMIN 
