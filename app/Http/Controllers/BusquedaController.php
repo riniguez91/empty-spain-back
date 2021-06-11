@@ -37,13 +37,12 @@ class BusquedaController extends Controller
      *     required=true,
      *     description="JSON containing scraper info",
      *     @OA\JsonContent(
-     *          required={"tripadvisor_info", "twitter_info", "tiempo_info", "wiki_info", "municipio_id", "usuario_id", "municipio_state"},
+     *          required={"tripadvisor_info", "twitter_info", "tiempo_info", "wiki_info", "municipio_id", "municipio_state"},
      *          @OA\Property(property="tripadvisor_info", ref="#/components/schemas/Busqueda/properties/tripadvisor_info"),
      *          @OA\Property(property="twitter_info", ref="#/components/schemas/Busqueda/properties/twitter_info"),
      *          @OA\Property(property="tiempo_info", ref="#/components/schemas/Busqueda/properties/tiempo_info"),
      *          @OA\Property(property="wiki_info", ref="#/components/schemas/Busqueda/properties/wiki_info"),
      *          @OA\Property(property="municipio_id", ref="#/components/schemas/Busqueda/properties/municipio_id"),
-     *          @OA\Property(property="usuario_id", ref="#/components/schemas/Busqueda/properties/usuario_id"),
      *          @OA\Property(property="municipio_state", ref="#/components/schemas/Busqueda/properties/municipio_state"),
      *      ),
      * ),   
@@ -61,7 +60,6 @@ class BusquedaController extends Controller
         $search->tiempo_info = $request->tiempo_info;
         $search->wiki_info = $request->wiki_info;
         $search->municipio_id = $request->municipio_id;
-        $search->usuario_id = $request->usuario_id;
         $search->municipio_state = $request->municipio_state;
         $search->no_searches = 1;
         $search->save();

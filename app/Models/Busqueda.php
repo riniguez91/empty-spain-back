@@ -15,7 +15,6 @@ use Laravel\Lumen\Auth\Authorizable;
  * @OA\Xml(name="Busqueda"),
  * @OA\Property(property="id", type="integer", description="Database PK", example="1"),
  * @OA\Property(property="municipio_id", type="integer", description="FK from municipio table", example="2045"),
- * @OA\Property(property="usuario_id", type="integer", description="FK from usuario table", example="1"),
  * @OA\Property(property="tripadvisor_info", type="string", description="Stringified JSON containing the result from tripadvisor scraper"),
  * @OA\Property(property="twitter_info", type="string", description="Stringified JSON containing the result from twitter scraper"),
  * @OA\Property(property="tiempo_info", type="string", description="Stringified JSON containing the result from tiempo scraper"),

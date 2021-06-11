@@ -16,7 +16,6 @@ class CreateBusquedaTable extends Migration
         Schema::create('busqueda', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('municipio_id')->unsigned();
-            $table->integer('usuario_id')->unsigned()->nullable();
             $table->longtext('tripadvisor_info');
             $table->longtext('twitter_info');
             $table->longtext('tiempo_info');
@@ -25,7 +24,6 @@ class CreateBusquedaTable extends Migration
             $table->boolean('highlighted')->default('0');
             $table->integer('no_searches')->default('0');
             $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('cascade');
-            $table->foreign('usuario_id')->references('id')->on('usuario')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -120,7 +120,6 @@
                                     "tiempo_info",
                                     "wiki_info",
                                     "municipio_id",
-                                    "usuario_id",
                                     "municipio_state"
                                 ],
                                 "properties": {
@@ -138,9 +137,6 @@
                                     },
                                     "municipio_id": {
                                         "$ref": "#/components/schemas/Busqueda/properties/municipio_id"
-                                    },
-                                    "usuario_id": {
-                                        "$ref": "#/components/schemas/Busqueda/properties/usuario_id"
                                     },
                                     "municipio_state": {
                                         "$ref": "#/components/schemas/Busqueda/properties/municipio_state"
@@ -540,11 +536,6 @@
                         "description": "FK from municipio table",
                         "type": "integer",
                         "example": "2045"
-                    },
-                    "usuario_id": {
-                        "description": "FK from usuario table",
-                        "type": "integer",
-                        "example": "1"
                     },
                     "tripadvisor_info": {
                         "description": "Stringified JSON containing the result from tripadvisor scraper",
