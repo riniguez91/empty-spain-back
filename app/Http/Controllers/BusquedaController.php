@@ -65,7 +65,8 @@ class BusquedaController extends Controller
         $search->save();
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'busqueda_id' => $search->id
         ], 200);
     }
 
@@ -105,6 +106,7 @@ class BusquedaController extends Controller
             return response()->json([
                 'scraped' => 'true',
                 'id' => $municipio->id,
+                'busqueda_id' => $busqueda->id,
                 'provincia' => $provincia->provincia,
                 'municipio' => $municipio->municipio,
                 'superficie' => $municipio->superficie,

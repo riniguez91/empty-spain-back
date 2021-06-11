@@ -80,10 +80,15 @@ class UserController extends Controller
      * )
      */
     public function insertUserSearch(Request $request) {
-        $user_search = new UserSearch;
-        $user_search->busqueda_id = $request->busqueda_id;
-        $user_search->user_id = $request->user_id;
-        $user_search->save();
+        $search = UserSearch::where('user_id', $request->user_id)->where('busqueda_id', $request->busqueda_id)->first();
+
+        // Check we dont insert an already searched town
+        if (!$search) {
+            $user_search = new UserSearch;
+            $user_search->busqueda_id = $request->busqueda_id;
+            $user_search->user_id = $request->user_id;
+            $user_search->save();
+        }
 
         return response()->json([
             'success' => true
