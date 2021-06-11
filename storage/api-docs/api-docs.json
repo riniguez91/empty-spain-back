@@ -521,6 +521,86 @@
                     }
                 ]
             }
+        },
+        "/getUserSearches": {
+            "post": {
+                "tags": [
+                    "User access"
+                ],
+                "summary": "Get the search history for a user",
+                "operationId": "App\\Http\\Controllers\\UserController::getUserSearches",
+                "requestBody": {
+                    "description": "JSON containing user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "$ref": "#/components/schemas/User/properties/id"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/insertUserSearch": {
+            "post": {
+                "tags": [
+                    "User access"
+                ],
+                "summary": "Insert a town into the user search history",
+                "operationId": "App\\Http\\Controllers\\UserController::insertUserSearch",
+                "requestBody": {
+                    "description": "JSON containing user and search id",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id",
+                                    "busqueda_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "$ref": "#/components/schemas/User/properties/id"
+                                    },
+                                    "busqueda_id": {
+                                        "$ref": "#/components/schemas/Busqueda/properties/id"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -751,6 +831,39 @@
                 "type": "object",
                 "xml": {
                     "name": "User"
+                }
+            },
+            "UserSearch": {
+                "properties": {
+                    "id": {
+                        "description": "Database PK",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "busqueda_id": {
+                        "description": "FK from busqueda table",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "user_id": {
+                        "description": "FK from usuario table",
+                        "type": "integer",
+                        "example": "6"
+                    },
+                    "created_at": {
+                        "description": "Initial creation timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Last update timestamp",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UserSearch"
                 }
             }
         }

@@ -27,6 +27,7 @@ $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
     $router->post('/userSearchHistory', 'UserController@getUserSearches');
+    $router->post('/insertUserSearch', 'UserController@insertUserSearch');
 });  
 
 // ADMIN 
