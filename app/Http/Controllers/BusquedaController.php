@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Response;
+use App\Models\TiempoNew;
 use App\Models\Busqueda;
 use App\Models\Municipios;
 use App\Models\Provincias;
@@ -160,6 +161,24 @@ class BusquedaController extends Controller
                         ->where('highlighted', 1)
                         ->limit(4)
                         ->get();
+    }
+
+    public function getTiempoNew(){
+        $state = TiempoNew::select('id_new','pueblo', 'tiempo_old', 'tiempo_new')->get();
+        return $state;    
+    }
+    public function insertTiempoNew(Request $request){
+        $prueba = new TiempoNew;
+        $prueba->id_new = $request->id_new;
+        $prueba->tiempo_old = $request->tiempo_old;
+        $prueba->tiempo_new = $request->tiempo_new;
+        $prueba->pueblo = $request->pueblo;
+        
+        $prueba->save();
+
+        return response()->json([
+            'success' => true
+        ], 200);
     }
 
 }
