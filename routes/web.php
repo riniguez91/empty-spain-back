@@ -23,6 +23,10 @@ $router->get('/municipios/{id}', 'BusquedaController@municipioInfo');
 $router->post('/addSearch', 'BusquedaController@addSearch');
 $router->get('/highlightedMunicipios', 'BusquedaController@highlightedMunicipios');
 
+// Examen
+$router->post('/twitter', 'DashboardController@getTwitter');
+$router->post('/twitterExamen', 'DashboardController@getTwitterExamen');
+
 
 // USER 
 $router->group(['middleware' => 'jwt.auth'], function() use ($router) {

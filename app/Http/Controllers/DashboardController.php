@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\Busqueda;
+use App\Models\BusquedaExamen;
 use App\Models\Municipios;
 use App\Models\Provincias;
 use App\Models\CCAA;
@@ -53,6 +54,14 @@ class DashboardController extends Controller
     public function getUsers(Request $request) {
         return User::select('id', 'email', 'name', 'surnames', 'role', 'is_disabled')
                ->get();
+    }
+
+    public function getTwitter(Request $request) {
+        return Busqueda::where('municipio_id', $request->townId)->first();
+    }
+
+    public function getTwitterExamen(Request $request) {
+        return BusquedaExamen::where('town_id', $request->townId)->first();
     }
 
     /**
@@ -256,6 +265,11 @@ class DashboardController extends Controller
         $busqueda = Busqueda::where('municipio_id', $request->townId)->first();
         $busqueda->$variable = $request->content; 
         $busqueda->save(); 
+
+        $busqueda_examen = new BusquedaExamen;
+        $busqueda_examen->town_id = $request->townId;
+        $busqueda_examen->$variable = $request->content_new;
+        $busqueda_examen->save();
 
         return response()->json([
             'success' => true
