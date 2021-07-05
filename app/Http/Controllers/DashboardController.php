@@ -36,7 +36,7 @@ class DashboardController extends Controller
      * path="/users",
      * summary="Gets all users records (except sensitive data such as password)",
      * tags={"Admin access"},
-     * security={ {"bearer": {} }},
+     * security={{ "bearerAuth": {}}},
      * @OA\Response(
      *      response=200,
      *      description="Success"
@@ -60,7 +60,16 @@ class DashboardController extends Controller
      * path="/updateUser",
      * summary="Update user credentials",
      * tags={"Admin access"},
-     * security={ {"bearer": {} }},
+     * security={{"bearerAuth":{}}},
+     * @OA\Parameter(
+ *         name="Authorization",
+ *         in="header",
+ *         required=true,
+ *         description="Bearer {access-token}",
+ *         @OA\Schema(
+ *              type="bearerAuth"
+ *         ) 
+ *      ),  
      * @OA\RequestBody(
      *     required=true,
      *     description="JSON containing user credentials",

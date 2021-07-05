@@ -239,7 +239,7 @@
                 },
                 "security": [
                     {
-                        "bearer": []
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -251,6 +251,17 @@
                 ],
                 "summary": "Update user credentials",
                 "operationId": "App\\Http\\Controllers\\DashboardController::updateUserCredentials",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer {access-token}",
+                        "required": true,
+                        "schema": {
+                            "type": "bearerAuth"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "JSON containing user credentials",
                     "required": true,
@@ -293,7 +304,7 @@
                 },
                 "security": [
                     {
-                        "bearer": []
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -865,6 +876,15 @@
                 "xml": {
                     "name": "UserSearch"
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

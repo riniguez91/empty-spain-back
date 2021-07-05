@@ -13,8 +13,16 @@ class Controller extends BaseController
      *   @OA\Contact(
      *     email="grupo5@gmail.com",
      *     name="Grupo 5 Support Team"
-     *   )
-     * )
+     *   ),
+     * ),
+     * @OA\SecurityScheme(
+    *   securityScheme="bearerAuth",
+ *      in="header",
+ *      name="bearerAuth",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="JWT",
+    * )
      */
     //
 }
